@@ -9,7 +9,7 @@ import {
 
 // Data Transfer Object (DTO) for user registration
 export class RegisterDto {
-  @IsEmail({}, { message: 'Please provide a valid email' })
+  @IsEmail({}, { message: 'Please provide a valid email address' })
   @IsNotEmpty({ message: 'Email is required' })
   email: string;
 
