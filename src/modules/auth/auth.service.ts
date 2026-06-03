@@ -73,7 +73,7 @@ export class AuthService {
     const refreshId = randomBytes(16).toString('hex');
 
     const [accessToken, refreshToken] = await Promise.all([
-      this.jwtService.signAsync(payload, { expiresIn: '15' }),
+      this.jwtService.signAsync(payload, { expiresIn: '15m' }),
       this.jwtService.signAsync({ ...payload, refreshId }, { expiresIn: '7d' }),
     ]);
 

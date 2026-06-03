@@ -30,7 +30,33 @@ async function bootstrap() {
   });
 
   // Enable swagger docs
-  const config = new DocumentBuilder();
+  const config = new DocumentBuilder()
+    .setTitle('API Documentation')
+    .setDescription('API documentation for the application')
+    .addTag('auth', 'Auth related endpoints')
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'JWT',
+        description: 'Enter JWT Token',
+        in: 'header'
+      }, 'JWT-auth'
+    )
+    .addBasicAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'Refresh-JWT',
+        description: 'Enter Refresh JWT Token',
+        in: 'header'
+      }, 'JWT-refresh'
+    )
+    .addServer('http://localhost:3001', 'Development Server')
+    .build();
+
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document, {
     swaggerOptions: {
